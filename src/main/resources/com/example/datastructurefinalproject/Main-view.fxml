@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="1100.0" prefHeight="500.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.datastructurefinalproject.MainViewController">
+   <children>
+      <VBox alignment="CENTER" minWidth="275.0" prefWidth="275.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onCredits" text="Credits">
+               <VBox.margin>
+                  <Insets bottom="20.0" right="200.0" />
+               </VBox.margin>
+            </Button>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <CheckBox mnemonicParsing="false" onAction="#insertionAct" text="Insertion">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" onAction="#selectionAct" text="Selection">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" onAction="#mergeAct" text="Merge">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" onAction="#heapAct" text="Heap">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" onAction="#quickAct" text="Quick">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" onAction="#countingAct" text="Counting">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" onAction="#radixAct" text="Radix">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" onAction="#bubbleAct" text="Bubble">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <ToggleButton mnemonicParsing="false" onAction="#sortAsympAct" text="Add Asymptotic Function(s)">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+               </children>
+            </VBox>
+            <TextField fx:id="largestElem" promptText="Largest Element">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="arrSize" promptText="Array Size">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="stepSize" nodeOrientation="LEFT_TO_RIGHT" promptText="Step Size">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#drawSort" text="Draw">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Label fx:id="labelAnt" layoutX="148.0" layoutY="392.0" />
+         </children>
+      </VBox>
+      <LineChart fx:id="lineChart" alternativeRowFillVisible="false" animated="false" axisSortingPolicy="NONE" createSymbols="false" legendSide="TOP" minWidth="550.0" prefWidth="550.0" HBox.hgrow="ALWAYS">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <TabPane prefWidth="275.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Generated Numbers">
+               <content>
+                  <VBox minWidth="275.0" prefWidth="275.0">
+                     <children>
+                        <TableView fx:id="tableList" VBox.vgrow="ALWAYS" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onTxt" text="Open in txt">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab text="Step Data">
+               <content>
+                  <VBox minWidth="275.0" prefWidth="275.0">
+                     <children>
+                        <TableView fx:id="stepTableList" VBox.vgrow="ALWAYS" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onStepTxt" text="Open in txt">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content></Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</HBox>
