@@ -714,15 +714,15 @@ public class MainViewController {
         if(tamam){
             FileChooser fileChooser = new FileChooser();
 
-            //Set extension filter for text files
+
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
             fileChooser.getExtensionFilters().add(extFilter);
 
             Stage stage = new Stage();
 
-            //Show save file dialog
+
             File file = fileChooser.showSaveDialog(stage);
-            //Its important towrite showSaveDialog!!!
+
             try{
                 Scanner myReader = new Scanner(file);
                 while(myReader.hasNextLine()){
@@ -1665,35 +1665,38 @@ public class MainViewController {
             outarr.add(0);
             //step++;
         }
-        int max = arr.get(0);
-        for(int i = 1; i < len; i++){
-            if(arr.get(i)>max){
-                max = arr.get(i);
+        if(len != 0){
+            int max = arr.get(0);
+            for(int i = 1; i < len; i++){
+                if(arr.get(i)>max){
+                    max = arr.get(i);
+                    step++;
+                }
+            }
+            ArrayList<Integer> count = new ArrayList<Integer>();
+            for(int j=0;j<=max;j++){
+                count.add(0);
+                // step++;
+            }
+            for(int i = 0;i<len;i++){
+                count.set(arr.get(i),count.get(arr.get(i))+1);
+                step++;
+            }
+            for(int i = 1;i <= max;i++){
+                count.set(i,count.get(i)+count.get(i-1));
+                step++;
+            }
+            for(int i = len-1;i>=0;i--){
+                outarr.set(count.get(arr.get(i))-1,arr.get(i));
+                count.set(arr.get(i),count.get(arr.get(i))-1);
+                step+=2;
+            }
+            for(int i = 0; i<len;i++){
+                arr.set(i,outarr.get(i));
                 step++;
             }
         }
-        ArrayList<Integer> count = new ArrayList<Integer>();
-        for(int j=0;j<=max;j++){
-            count.add(0);
-           // step++;
-        }
-        for(int i = 0;i<len;i++){
-            count.set(arr.get(i),count.get(arr.get(i))+1);
-            step++;
-        }
-        for(int i = 1;i <= max;i++){
-            count.set(i,count.get(i)+count.get(i-1));
-            step++;
-        }
-        for(int i = len-1;i>=0;i--){
-            outarr.set(count.get(arr.get(i))-1,arr.get(i));
-            count.set(arr.get(i),count.get(arr.get(i))-1);
-            step+=2;
-        }
-        for(int i = 0; i<len;i++){
-            arr.set(i,outarr.get(i));
-            step++;
-        }
+
 
     }
 
