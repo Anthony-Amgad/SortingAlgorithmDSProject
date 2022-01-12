@@ -1299,7 +1299,7 @@ public class MainViewController {
 
                 labelAnt.textProperty().setValue("");
             }catch(Exception e){
-                labelAnt.textProperty().setValue("Please make sure the file is not empty");
+                labelAnt.textProperty().setValue("Please make sure the file valid");
             }
         }else{
             if(stepSi <= 0){
