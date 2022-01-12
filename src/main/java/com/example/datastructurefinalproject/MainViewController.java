@@ -6,12 +6,12 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 
 public class MainViewController {
@@ -661,6 +661,653 @@ public class MainViewController {
                 labelAnt.textProperty().setValue("Please make sure you entered valid info");
             }
         }
+
+    }
+
+
+    @FXML
+    protected void importSort(){
+        int stepSi = 0;
+        boolean tamam = true;
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        ArrayList<Integer> xrr = new ArrayList<Integer>();
+        XYChart.Series<String,Number> insertionSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> selectionSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> mergeSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> heapSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> quickSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> countingSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> radixSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> bubbleSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> nsquaredSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> nlgnSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> npluskSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<String,Number> dnpluskSeries = new XYChart.Series<String, Number>();
+        insertionSeries.setName("Insertion");
+        selectionSeries.setName("Selection");
+        mergeSeries.setName("Merge");
+        heapSeries.setName("Heap");
+        quickSeries.setName("Quick");
+        countingSeries.setName("Counting");
+        radixSeries.setName("Radix");
+        bubbleSeries.setName("Bubble");
+        nsquaredSeries.setName("n^2");
+        nlgnSeries.setName("nlg(n)");
+        npluskSeries.setName("n + k");
+        dnpluskSeries.setName("d(n + k)");
+
+        ArrayList<Integer> steparr = new ArrayList<Integer>();
+        ArrayList<Integer> insertionStep = new ArrayList<Integer>();
+        ArrayList<Integer> selectionStep = new ArrayList<Integer>();
+        ArrayList<Integer> mergeStep = new ArrayList<Integer>();
+        ArrayList<Integer> heapStep = new ArrayList<Integer>();
+        ArrayList<Integer> quickStep = new ArrayList<Integer>();
+        ArrayList<Integer> countingStep = new ArrayList<Integer>();
+        ArrayList<Integer> radixStep = new ArrayList<Integer>();
+        ArrayList<Integer> bubbleStep = new ArrayList<Integer>();
+        try{
+            stepSi = Integer.parseInt(stepSize.textProperty().get());
+        }catch (Exception e){
+            labelAnt.textProperty().setValue("Please make sure you entered a valid Step Size");
+            tamam = false;
+        }
+        if(tamam){
+            FileChooser fileChooser = new FileChooser();
+
+            //Set extension filter for text files
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            Stage stage = new Stage();
+
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(stage);
+            //Its important towrite showSaveDialog!!!
+            try{
+                Scanner myReader = new Scanner(file);
+                while(myReader.hasNextLine()){
+                    arr.add(Integer.parseInt(myReader.nextLine()));
+                }
+                myReader.close();
+
+            }catch(Exception e){
+                labelAnt.textProperty().setValue("Please make sure you imported a valid File");
+                tamam = false;
+            }
+        }
+
+
+
+        if(tamam && stepSi > 0){
+            try{
+                Integer maximum = Collections.max(arr);
+
+                if(arr.isEmpty()){
+                    Exception e = new Exception();
+                    throw e;
+                }
+                FileWriter myWriter = new FileWriter("randomNum.txt");
+                for(int i=0;i<arr.size();i++){
+                    myWriter.write(arr.get(i) + "\n");
+                }
+                myWriter.close();
+                try {
+                    File myFile = new File("insertionSorted.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("selectionSorted.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("mergeSorted.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("heapSorted.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("quickSorted.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("countingSorted.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("radixSorted.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("bubbleSorted.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+
+
+                try {
+                    File myFile = new File("insertionStep.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("selectionStep.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("mergeStep.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("heapStep.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("quickStep.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("countingStep.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("radixStep.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+                try {
+                    File myFile = new File("bubbleStep.txt");
+                    myFile.delete();
+                }catch(Exception e){
+
+                }
+
+
+                for(int j=0;j<arr.size();j++){
+                    xrr.add(0);
+                }
+                for(int i = 0; i< arr.size();i+=stepSi){
+                    steparr.add(i);
+                    if(insertionFlag){
+                        for(int j=0;j<arr.size();j++){
+                            xrr.set(j,arr.get(j));
+                        }
+                        step = 0;
+                        insertionSort(xrr,i);
+                        insertionSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),step));
+                        insertionStep.add(step);
+                    }
+                    if(selectionFlag){
+                        for(int j=0;j<arr.size();j++){
+                            xrr.set(j,arr.get(j));
+                        }
+                        step = 0;
+                        selectionSort(xrr,i);
+                        selectionSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),step));
+                        selectionStep.add(step);
+                    }
+                    if(mergeFlag){
+                        for(int j=0;j<arr.size();j++){
+                            xrr.set(j,arr.get(j));
+                        }
+                        step = 0;
+                        mergeSort(xrr,0,i-1);
+                        mergeSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),step));
+                        mergeStep.add(step);
+                    }
+                    if(heapFlag){
+                        for(int j=0;j<arr.size();j++){
+                            xrr.set(j,arr.get(j));
+                        }
+                        step = 0;
+                        heapSort(xrr,i);
+                        heapSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),step));
+                        heapStep.add(step);
+                    }
+                    if(quickFlag){
+                        for(int j=0;j<arr.size();j++){
+                            xrr.set(j,arr.get(j));
+                        }
+                        step = 0;
+                        quickSort(xrr,0,i-1);
+                        quickSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),step));
+                        quickStep.add(step);
+                    }
+                    if(countingFlag){
+                        for(int j=0;j<arr.size();j++){
+                            xrr.set(j,arr.get(j));
+                        }
+                        step = 0;
+                        countingSort(xrr,i);
+                        countingSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),step));
+                        countingStep.add(step);
+                    }
+                    if(radixFlag){
+                        for(int j=0;j<arr.size();j++){
+                            xrr.set(j,arr.get(j));
+                        }
+                        step = 0;
+                        radixSort(xrr,i);
+                        radixSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),step));
+                        radixStep.add(step);
+                    }
+                    if(bubbleFlag){
+                        for(int j=0;j< arr.size();j++){
+                            xrr.set(j,arr.get(j));
+                        }
+                        step = 0;
+                        bubbleSort(xrr,i);
+                        bubbleSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),step));
+                        bubbleStep.add(step);
+                    }
+                    if(sortAsympFlag){
+                        if(insertionFlag||selectionFlag||bubbleFlag){
+                            nsquaredSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),i*i));
+                        }
+                        if(mergeFlag||quickFlag||heapFlag){
+                            nlgnSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),i*(int)(Math.log(i)/Math.log(2))));
+                        }
+                        if(countingFlag){
+                            npluskSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),i+maximum));
+                        }
+                        if(radixFlag){
+                            dnpluskSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),(maximum.toString().length())*(i+maximum)));
+                        }
+                    }
+                }
+
+                lineChart.getData().clear();
+                tableList.getColumns().clear();
+                stepTableList.getColumns().clear();
+                tableList.getItems().clear();
+                stepTableList.getItems().clear();
+
+                steparr.add(arr.size());
+
+                for(int j=0;j<arr.size();j++){
+                    tableList.getItems().add(j);
+                }
+                for(int j=0;j<steparr.size();j++){
+                    stepTableList.getItems().add(j);
+                }
+
+                TableColumn<Integer, Number> randomColumn = new TableColumn<>("Random Numbers");
+                randomColumn.setCellValueFactory(cellData -> {
+                    Integer rowIndex = cellData.getValue();
+                    return new ReadOnlyIntegerWrapper(arr.get(rowIndex));
+                });
+                tableList.getColumns().add(randomColumn);
+
+                TableColumn<Integer, Number> stepColumn = new TableColumn<>("Array Size (n)");
+                stepColumn.setCellValueFactory(cellData -> {
+                    Integer rowIndex = cellData.getValue();
+                    return new ReadOnlyIntegerWrapper(steparr.get(rowIndex));
+                });
+                stepTableList.getColumns().add(stepColumn);
+
+                if(insertionFlag){
+                    for(int j=0;j<arr.size();j++){
+                        xrr.set(j,arr.get(j));
+                    }
+                    step = 0;
+                    insertionSort(xrr,arr.size());
+                    insertionSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(arr.size()),step));
+                    lineChart.getData().add(insertionSeries);
+                    insertionStep.add(step);
+
+                    TableColumn<Integer, Number> insertionColumn = new TableColumn<>("Insertion Sorted");
+                    insertionColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(xrr.get(rowIndex));
+                    });
+
+                    TableColumn<Integer, Number> insertionStepColumn = new TableColumn<>("Insertion Step");
+                    insertionStepColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(insertionStep.get(rowIndex));
+                    });
+
+                    FileWriter Writer = new FileWriter("insertionSorted.txt");
+                    for(int i=0;i< arr.size();i++){
+                        Writer.write(xrr.get(i) + "\n");
+                    }
+                    Writer.close();
+
+                    FileWriter stepWriter = new FileWriter("insertionStep.txt");
+                    for(int i=0;i<steparr.size();i++){
+                        stepWriter.write(steparr.get(i) + "," + insertionStep.get(i) + "\n");
+                    }
+                    stepWriter.close();
+
+                    tableList.getColumns().add(insertionColumn);
+                    stepTableList.getColumns().add(insertionStepColumn);
+                }
+
+                if(selectionFlag){
+                    for(int j=0;j<arr.size();j++){
+                        xrr.set(j,arr.get(j));
+                    }
+                    step=0;
+                    selectionSort(xrr,arr.size());
+                    selectionSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(arr.size()),step));
+                    lineChart.getData().add(selectionSeries);
+                    selectionStep.add(step);
+
+                    TableColumn<Integer, Number> selectionColumn = new TableColumn<>("Selection Sorted");
+                    selectionColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(xrr.get(rowIndex));
+                    });
+
+                    TableColumn<Integer, Number> selectionStepColumn = new TableColumn<>("Selection Step");
+                    selectionStepColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(selectionStep.get(rowIndex));
+                    });
+
+                    FileWriter Writer = new FileWriter("selectionSorted.txt");
+                    for(int i=0;i<arr.size();i++){
+                        Writer.write(xrr.get(i) + "\n");
+                    }
+                    Writer.close();
+
+                    FileWriter stepWriter = new FileWriter("selectionStep.txt");
+                    for(int i=0;i<steparr.size();i++){
+                        stepWriter.write(steparr.get(i) + "," + selectionStep.get(i) + "\n");
+                    }
+                    stepWriter.close();
+
+                    tableList.getColumns().add(selectionColumn);
+                    stepTableList.getColumns().add(selectionStepColumn);
+                }
+
+                if(mergeFlag){
+                    for(int j=0;j<arr.size();j++){
+                        xrr.set(j,arr.get(j));
+                    }
+                    step = 0;
+                    mergeSort(xrr,0,arr.size()-1);
+                    mergeSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(arr.size()),step));
+                    lineChart.getData().add(mergeSeries);
+                    mergeStep.add(step);
+
+                    TableColumn<Integer, Number> mergeColumn = new TableColumn<>("Merge Sorted");
+                    mergeColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(xrr.get(rowIndex));
+                    });
+
+                    TableColumn<Integer, Number> mergeStepColumn = new TableColumn<>("Merge Step");
+                    mergeStepColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(mergeStep.get(rowIndex));
+                    });
+
+                    FileWriter Writer = new FileWriter("mergeSorted.txt");
+                    for(int i=0;i<arr.size();i++){
+                        Writer.write(xrr.get(i) + "\n");
+                    }
+                    Writer.close();
+
+                    FileWriter stepWriter = new FileWriter("mergeStep.txt");
+                    for(int i=0;i<steparr.size();i++){
+                        stepWriter.write(steparr.get(i) + "," + mergeStep.get(i) + "\n");
+                    }
+                    stepWriter.close();
+
+                    tableList.getColumns().add(mergeColumn);
+                    stepTableList.getColumns().add(mergeStepColumn);
+                }
+
+                if(heapFlag){
+                    for(int j=0;j<arr.size();j++){
+                        xrr.set(j,arr.get(j));
+                    }
+                    step = 0;
+                    heapSort(xrr,arr.size());
+                    heapSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(arr.size()),step));
+                    lineChart.getData().add(heapSeries);
+                    heapStep.add(step);
+
+                    TableColumn<Integer, Number> heapColumn = new TableColumn<>("Heap Sorted");
+                    heapColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(xrr.get(rowIndex));
+                    });
+
+                    TableColumn<Integer, Number> heapStepColumn = new TableColumn<>("Heap Step");
+                    heapStepColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(heapStep.get(rowIndex));
+                    });
+
+                    FileWriter Writer = new FileWriter("heapSorted.txt");
+                    for(int i=0;i<arr.size();i++){
+                        Writer.write(xrr.get(i) + "\n");
+                    }
+                    Writer.close();
+
+                    FileWriter stepWriter = new FileWriter("heapStep.txt");
+                    for(int i=0;i<steparr.size();i++){
+                        stepWriter.write(steparr.get(i) + "," + heapStep.get(i) + "\n");
+                    }
+                    stepWriter.close();
+
+                    tableList.getColumns().add(heapColumn);
+                    stepTableList.getColumns().add(heapStepColumn);
+                }
+
+                if(quickFlag){
+                    for(int j=0;j<arr.size();j++){
+                        xrr.set(j,arr.get(j));
+                    }
+                    step=0;
+                    quickSort(xrr,0, arr.size()-1);
+                    quickSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(arr.size()),step));
+                    lineChart.getData().add(quickSeries);
+                    quickStep.add(step);
+
+                    TableColumn<Integer, Number> quickColumn = new TableColumn<>("Quick Sorted");
+                    quickColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(xrr.get(rowIndex));
+                    });
+
+                    TableColumn<Integer, Number> quickStepColumn = new TableColumn<>("Quick Step");
+                    quickStepColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(quickStep.get(rowIndex));
+                    });
+
+                    FileWriter Writer = new FileWriter("quickSorted.txt");
+                    for(int i=0;i<arr.size();i++){
+                        Writer.write(xrr.get(i) + "\n");
+                    }
+                    Writer.close();
+
+                    FileWriter stepWriter = new FileWriter("quickStep.txt");
+                    for(int i=0;i<steparr.size();i++){
+                        stepWriter.write(steparr.get(i) + "," + quickStep.get(i) + "\n");
+                    }
+                    stepWriter.close();
+
+                    tableList.getColumns().add(quickColumn);
+                    stepTableList.getColumns().add(quickStepColumn);
+                }
+
+                if(countingFlag){
+                    for(int j=0;j< arr.size();j++){
+                        xrr.set(j,arr.get(j));
+                    }
+                    step=0;
+                    countingSort(xrr, arr.size());
+                    countingSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(arr.size()),step));
+                    lineChart.getData().add(countingSeries);
+                    countingStep.add(step);
+
+                    TableColumn<Integer, Number> countingColumn = new TableColumn<>("Counting Sorted");
+                    countingColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(xrr.get(rowIndex));
+                    });
+
+                    TableColumn<Integer, Number> countingStepColumn = new TableColumn<>("Counting Step");
+                    countingStepColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(countingStep.get(rowIndex));
+                    });
+
+                    FileWriter Writer = new FileWriter("countingSorted.txt");
+                    for(int i=0;i< arr.size();i++){
+                        Writer.write(xrr.get(i) + "\n");
+                    }
+                    Writer.close();
+
+                    FileWriter stepWriter = new FileWriter("countingStep.txt");
+                    for(int i=0;i<steparr.size();i++){
+                        stepWriter.write(steparr.get(i) + "," + countingStep.get(i) + "\n");
+                    }
+                    stepWriter.close();
+
+                    tableList.getColumns().add(countingColumn);
+                    stepTableList.getColumns().add(countingStepColumn);
+                }
+
+                if(radixFlag){
+                    for(int j=0;j<arr.size();j++){
+                        xrr.set(j,arr.get(j));
+                    }
+                    step = 0;
+                    radixSort(xrr,arr.size());
+                    radixSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(arr.size()),step));
+                    lineChart.getData().add(radixSeries);
+                    radixStep.add(step);
+
+                    TableColumn<Integer, Number> radixColumn = new TableColumn<>("Radix Sorted");
+                    radixColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(xrr.get(rowIndex));
+                    });
+
+                    TableColumn<Integer, Number> radixStepColumn = new TableColumn<>("Radix Step");
+                    radixStepColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(radixStep.get(rowIndex));
+                    });
+
+                    FileWriter Writer = new FileWriter("radixSorted.txt");
+                    for(int i=0;i<arr.size();i++){
+                        Writer.write(xrr.get(i) + "\n");
+                    }
+                    Writer.close();
+
+                    FileWriter stepWriter = new FileWriter("radixStep.txt");
+                    for(int i=0;i<steparr.size();i++){
+                        stepWriter.write(steparr.get(i) + "," + radixStep.get(i) + "\n");
+                    }
+                    stepWriter.close();
+
+                    tableList.getColumns().add(radixColumn);
+                    stepTableList.getColumns().add(radixStepColumn);
+                }
+
+                if(bubbleFlag){
+                    for(int j=0;j< arr.size();j++){
+                        xrr.set(j,arr.get(j));
+                    }
+                    step = 0;
+                    bubbleSort(xrr, arr.size());
+                    bubbleSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(arr.size()),step));
+                    lineChart.getData().add(bubbleSeries);
+                    bubbleStep.add(step);
+
+                    TableColumn<Integer, Number> bubbleColumn = new TableColumn<>("Bubble Sorted");
+                    bubbleColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(xrr.get(rowIndex));
+                    });
+
+                    TableColumn<Integer, Number> bubbleStepColumn = new TableColumn<>("Bubble Step");
+                    bubbleStepColumn.setCellValueFactory(cellData -> {
+                        Integer rowIndex = cellData.getValue();
+                        return new ReadOnlyIntegerWrapper(bubbleStep.get(rowIndex));
+                    });
+
+                    FileWriter Writer = new FileWriter("bubbleSorted.txt");
+                    for(int i=0;i< arr.size();i++){
+                        Writer.write(xrr.get(i) + "\n");
+                    }
+                    Writer.close();
+
+                    FileWriter stepWriter = new FileWriter("bubbleStep.txt");
+                    for(int i=0;i<steparr.size();i++){
+                        stepWriter.write(steparr.get(i) + "," + bubbleStep.get(i) + "\n");
+                    }
+                    stepWriter.close();
+
+                    tableList.getColumns().add(bubbleColumn);
+                    stepTableList.getColumns().add(bubbleStepColumn);
+                }
+
+                if(sortAsympFlag){
+                    int i = arr.size();
+                    if(insertionFlag||selectionFlag||bubbleFlag){
+                        nsquaredSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),i*i));
+                        lineChart.getData().add(nsquaredSeries);
+                    }
+                    if(mergeFlag||quickFlag||heapFlag){
+                        nlgnSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),i*(int)(Math.log(i)/Math.log(2))));
+                        lineChart.getData().add(nlgnSeries);
+                    }
+                    if(countingFlag){
+                        npluskSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),i+maximum ));
+                        lineChart.getData().add(npluskSeries);
+                    }
+                    if(radixFlag){
+                        dnpluskSeries.getData().add(new XYChart.Data<String, Number>(String.valueOf(i),maximum.toString().length()*(i+maximum)));
+                        lineChart.getData().add(dnpluskSeries);
+                    }
+                }
+
+                labelAnt.textProperty().setValue("");
+            }catch(Exception e){
+                labelAnt.textProperty().setValue("Please make sure the file is not empty");
+            }
+        }else{
+            if(stepSi <= 0){
+                labelAnt.textProperty().setValue("Please make sure the step value is valid");
+            }
+        }
+
+
 
     }
 
